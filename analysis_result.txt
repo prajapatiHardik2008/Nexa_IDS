@@ -1,0 +1,18 @@
+## 1. Inventory of the Entities Involved  
+
+| Device | IP | Role (as appears in traffic) |
+|--------|----|------------------------------|
+| **Internal host A** | 10.31.80.139 | Client, initiates both UDP-based and TCP connections |
+| **Internal host B** | 10.31.80.162 | Likely a local service appliance (e.g., DNS, custom agent) |
+| **External host 1** | 142.251.42.238 | Public internet host (Google‑related) establishing HTTPS traffic |
+| **External host 2** | 13.89.179.13 | Public internet host, same session pattern as host 1, also HTTPS |
+
+> **Key observation** – All external traffic is to HTTPS (port 443) and originates from very high random source ports. This is typical of normal web browsing.
+
+### Protocol breakdown for the internal pair (10.31.80.139 ↔ 10.31.80.162)
+
+| Protocol | Typical Destination Port | How often seen in this capture |
+|----------|--------------------------|--------------------------------|
+| UDP (17) | 53 (DNS)  | 2 exchanges |
+| UDP (17) | High‑numbered ports (49749, 54013, 57586) | 5+ exchanges |
+| UDP (17) | Port 80 → 57586 | 3
